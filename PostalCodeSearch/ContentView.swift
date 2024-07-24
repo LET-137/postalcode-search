@@ -68,8 +68,21 @@ struct ContentView: View {
         }
         .navigationBarTitle("住所、郵便番号検索",displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {
-            postAddress.fetchZipcode(url: fetchPostalCode())
-            postAddress.fetchAddress(url: fetchAddress())
+            postAddress.fetchZipcode(url: fetchPostalCode(),decodeType: Int.self) { result in
+                switch result {
+                case .success(let zipcode):
+                    self.zipcode = zipcode
+                case .failure(let error):
+                    print(error)
+                    self.zipcode = ""
+                }
+            }
+            postAddress.fetchAddress(url: fetchAddress(), decodeType: AddressResponse.self) { result in
+                switch result {
+                case .success(let address):
+                    postAddress
+                }
+            }
         },label: {
             Text("検索")
         }
