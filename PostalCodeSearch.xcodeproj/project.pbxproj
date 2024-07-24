@@ -14,6 +14,7 @@
 		C7E0CF5A2C50900700A3A5FE /* PostalCodeSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E0CF592C50900700A3A5FE /* PostalCodeSearchTests.swift */; };
 		C7E0CF642C50900700A3A5FE /* PostalCodeSearchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E0CF632C50900700A3A5FE /* PostalCodeSearchUITests.swift */; };
 		C7E0CF662C50900700A3A5FE /* PostalCodeSearchUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E0CF652C50900700A3A5FE /* PostalCodeSearchUITestsLaunchTests.swift */; };
+		C7E0CF732C50901900A3A5FE /* APIData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E0CF722C50901900A3A5FE /* APIData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		C7E0CF5F2C50900700A3A5FE /* PostalCodeSearchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PostalCodeSearchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7E0CF632C50900700A3A5FE /* PostalCodeSearchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostalCodeSearchUITests.swift; sourceTree = "<group>"; };
 		C7E0CF652C50900700A3A5FE /* PostalCodeSearchUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostalCodeSearchUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C7E0CF722C50901900A3A5FE /* APIData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			children = (
 				C7E0CF482C50900600A3A5FE /* PostalCodeSearchApp.swift */,
 				C7E0CF4A2C50900600A3A5FE /* ContentView.swift */,
+				C7E0CF722C50901900A3A5FE /* APIData.swift */,
 				C7E0CF4C2C50900700A3A5FE /* Assets.xcassets */,
 				C7E0CF4E2C50900700A3A5FE /* Preview Content */,
 			);
@@ -257,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7E0CF732C50901900A3A5FE /* APIData.swift in Sources */,
 				C7E0CF4B2C50900600A3A5FE /* ContentView.swift in Sources */,
 				C7E0CF492C50900600A3A5FE /* PostalCodeSearchApp.swift in Sources */,
 			);

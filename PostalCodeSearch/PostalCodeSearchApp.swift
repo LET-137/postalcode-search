@@ -1,17 +1,12 @@
-//
-//  PostalCodeSearchApp.swift
-//  PostalCodeSearch
-//
-//  Created by 津本拓也 on 2024/07/24.
-//
-
 import SwiftUI
 
 @main
 struct PostalCodeSearchApp: App {
+    @StateObject var postAddress = PostAddress()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(postAddress)
         }
     }
 }

@@ -1,10 +1,3 @@
-//
-//  PostalCodeSearchTests.swift
-//  PostalCodeSearchTests
-//
-//  Created by 津本拓也 on 2024/07/24.
-//
-
 import XCTest
 @testable import PostalCodeSearch
 
