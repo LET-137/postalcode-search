@@ -17,6 +17,11 @@ struct Address: Codable {
 class PostAddress: ObservableObject {
     @Published var address: [Address] = []
     @Published var zipAddress: String = ""
+    private var urlSession: URLSession
+    
+    init(urlSession: URLSession = .shared) {
+        self.urlSession = urlSession
+    }
     
 //    郵便番号を取得
     func fetchZipcode <T: Decodable>(url: String, decodeType: T.Type, completion: @escaping (Result<String, Error>) -> Void) {
@@ -51,7 +56,7 @@ class PostAddress: ObservableObject {
         guard let urlString = URL(string: url) else { return }
         let request = URLRequest(url: urlString)
         
-        URLSession.shared.dataTask(with: request) { data, response , error in
+        urlSession.dataTask(with: request) { data, response , error in
             if let error = error {
                 completion(.failure(error))
                 return

@@ -7,18 +7,21 @@ class PostAddressTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        postAddress = PostAddress()
         
         // URLProtocolMockをURLSessionのプロトコルクラスに設定
         let config = URLSessionConfiguration.ephemeral
         config.protocolClasses = [URLProtocolMock.self]
         urlSession = URLSession(configuration: config)
+        
+        postAddress = PostAddress(urlSession: urlSession)
     }
     
     override func tearDownWithError() throws {
         postAddress = nil
+        urlSession = nil
         try super.tearDownWithError()
     }
+    
     
     func testFetchZipcodeSuccess() throws {
         let mockURL = "https://mockurl.com/success"
@@ -32,7 +35,7 @@ class PostAddressTests: XCTestCase {
         postAddress.fetchZipcode(url: mockURL, decodeType: Int.self) { result in
             switch result {
             case .success(let zipcode):
-                XCTAssertEqual(zipcode, "\(mockZipcode)")
+                XCTAssertEqual(zipcode, "123-4567")
             case .failure(let error):
                 XCTFail("Error: \(error)")
             }
@@ -52,11 +55,10 @@ class PostAddressTests: XCTestCase {
         let expectation = self.expectation(description: "Fetch Address")
         postAddress.fetchAddress(url: mockURL, decodeType: AddressResponse.self) { result in
             switch result {
-            case .success(let addresses):
-                XCTAssertEqual(addresses.count, 1)
-                if !self.postAddress.address.isEmpty {
-                   XCTAssertEqual(self.postAddress.address[0].zipcode, "123-4567")
-                }
+            case .success(let address):
+                XCTAssertEqual(address.count, 1)
+                XCTAssertEqual(address[0].zipcode, "123-4567")
+                
             case .failure(let error):
                 XCTFail("Error: \(error)")
             }
