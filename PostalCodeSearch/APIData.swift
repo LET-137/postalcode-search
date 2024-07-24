@@ -1,17 +1,18 @@
 import Foundation
 import SwiftUI
 
+//住所レスポンス
 struct AddressResponse: Codable {
     var status: Int
     var message: String?
     var results: [Address]?
 }
-
+//住所を県、市、町に分類
 struct Address: Codable {
     var zipcode: String
-    var address1: String
-    var address2: String
-    var address3: String
+    var prefecture: String
+    var city: String
+    var town: String
 }
 
 class PostAddress: ObservableObject {

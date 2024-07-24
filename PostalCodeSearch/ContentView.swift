@@ -69,19 +69,19 @@ struct ContentView: View {
                         HStack {
                             Text("県名")
                             Spacer()
-                            Text(address.address1)
+                            Text(address.prefecture)
                                 .foregroundStyle(.blue)
                         }
                         HStack {
                             Text("市名")
                             Spacer()
-                            Text(address.address2)
+                            Text(address.city)
                                 .foregroundStyle(.blue)
                         }
                         HStack {
                             Text("町名")
                             Spacer()
-                            Text(address.address3)
+                            Text(address.town)
                                 .foregroundStyle(.blue)
                         }
                     }
@@ -91,12 +91,14 @@ struct ContentView: View {
         }
     }
     
+//    入力した郵便番号に基づいてURLを作成
     func fetchAddress() -> String {
         let baseUrl = "https://zipcloud.ibsnet.co.jp/api/search"
         let urlString = "\(baseUrl)?zipcode=\(zipcode)&limit=1"
         return urlString
     }
     
+    //    入力した住所に基づいてURLを作成
     func fetchPostalCode() -> String {
         let baseUrl = "https://api.excelapi.org/post/zipcode?address=\(addressString)"
         return baseUrl
