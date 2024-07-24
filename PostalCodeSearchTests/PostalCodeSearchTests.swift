@@ -53,7 +53,7 @@ class PostAddressTests: XCTestCase {
 //    住所取得テスト　testFetchZipcodeSuccessと同等の処理を行う
     func testFetchAddressSuccess() throws {
         let mockURL = "https://mockurl.com/success"
-        let mockResponse = AddressResponse(status: 200, message: nil, results: [Address(zipcode: "123-4567", prefecture: "Tokyo", city: "Shibuya", town: "Dogenzaka")])
+        let mockResponse = AddressResponse(status: 200, message: nil, results: [Address(zipcode: "123-4567", address1: "Tokyo", address2: "Shibuya", address3: "Dogenzaka")])
         let mockData = try JSONEncoder().encode(mockResponse)
         
         URLProtocolMock.testURLs = [mockURL: mockData]

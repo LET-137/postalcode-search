@@ -28,6 +28,7 @@ struct ContentView: View {
                                         }
                                     }
                                 }
+                                UIApplication.shared.endEditing()
                             }
                             .fontWeight(.bold)
                             .padding()
@@ -56,6 +57,7 @@ struct ContentView: View {
                                     }
                                 }
                             }
+                            UIApplication.shared.endEditing()
                         }
                         .fontWeight(.bold)
                         .padding()
@@ -69,19 +71,19 @@ struct ContentView: View {
                         HStack {
                             Text("県名")
                             Spacer()
-                            Text(address.prefecture)
+                            Text(address.address1)
                                 .foregroundStyle(.blue)
                         }
                         HStack {
                             Text("市名")
                             Spacer()
-                            Text(address.city)
+                            Text(address.address2)
                                 .foregroundStyle(.blue)
                         }
                         HStack {
                             Text("町名")
                             Spacer()
-                            Text(address.town)
+                            Text(address.address3)
                                 .foregroundStyle(.blue)
                         }
                     }
@@ -95,12 +97,20 @@ struct ContentView: View {
     func fetchAddress() -> String {
         let baseUrl = "https://zipcloud.ibsnet.co.jp/api/search"
         let urlString = "\(baseUrl)?zipcode=\(zipcode)&limit=1"
+        print("URL: \(urlString)")
         return urlString
     }
     
     //    入力した住所に基づいてURLを作成
     func fetchPostalCode() -> String {
         let baseUrl = "https://api.excelapi.org/post/zipcode?address=\(addressString)"
+        print("URL: \(baseUrl)")
         return baseUrl
+    }
+}
+//キーボードを閉じる処理
+extension UIApplication {
+    func endEditing() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }

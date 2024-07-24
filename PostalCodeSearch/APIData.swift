@@ -10,9 +10,9 @@ struct AddressResponse: Codable {
 //住所を県、市、町に分類
 struct Address: Codable {
     var zipcode: String
-    var prefecture: String
-    var city: String
-    var town: String
+    var address1: String
+    var address2: String
+    var address3: String
 }
 
 class PostAddress: ObservableObject {
@@ -35,6 +35,7 @@ class PostAddress: ObservableObject {
                 }
             case .failure(let error):
                 completion(.failure(error))
+                print("fetchZipcodeError: \(error)")
             }
         }
     }
@@ -48,6 +49,7 @@ class PostAddress: ObservableObject {
                 completion(.success(address))
             case .failure(let error):
                 completion(.failure(error))
+                print("fetchAddressError: \(error)")
             }
         }
     }
@@ -66,11 +68,14 @@ class PostAddress: ObservableObject {
                 completion(.failure(NSError(domain: "dataTask", code: -1, userInfo: [NSLocalizedDescriptionKey: "データを受け取れません"])))
                 return
             }
+
+            
             do {
                 let decodedResponse = try JSONDecoder().decode(decodeType, from: data)
                 completion(.success(decodedResponse))
             } catch {
                 completion(.failure(error))
+                print("fetchDataError: \(error)")
             }
         }.resume()
     }
