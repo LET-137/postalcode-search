@@ -15,7 +15,19 @@ struct ContentView: View {
                             .overlay(RoundedRectangle(cornerRadius: 5) .stroke(Color.gray,lineWidth: 1))
                         HStack {
                             Button("郵便番号を検索") {
-                                postAddress.fetchZipcode(url: fetchPostalCode())
+                                postAddress.fetchZipcode(url: fetchPostalCode(),decodeType: Int.self) { result in
+                                    switch result {
+                                    case .success(let zipcode):
+                                        DispatchQueue.main.async {
+                                            postAddress.zipAddress = zipcode
+                                        }
+                                    case .failure(let error):
+                                        print(error)
+                                        DispatchQueue.main.async {
+                                            postAddress.zipAddress = ""
+                                        }
+                                    }
+                                }
                             }
                             .fontWeight(.bold)
                             .padding()
@@ -32,7 +44,18 @@ struct ContentView: View {
                             .overlay(RoundedRectangle(cornerRadius: 5) .stroke(Color.gray,lineWidth: 1))
                         
                         Button("住所を検索") {
-                            postAddress.fetchAddress(url: fetchAddress())
+                            postAddress.fetchAddress(url: fetchAddress(), decodeType: AddressResponse.self) { result in
+                                switch result {
+                                case .success(let address):
+                                    DispatchQueue.main.async {
+                                        postAddress.address = address
+                                    }
+                                case .failure(_):
+                                    DispatchQueue.main.async {
+                                        postAddress.address = []
+                                    }
+                                }
+                            }
                         }
                         .fontWeight(.bold)
                         .padding()
@@ -66,27 +89,6 @@ struct ContentView: View {
                 .scrollContentBackground(.hidden)
             }
         }
-        .navigationBarTitle("住所、郵便番号検索",displayMode: .inline)
-        .navigationBarItems(trailing: Button(action: {
-            postAddress.fetchZipcode(url: fetchPostalCode(),decodeType: Int.self) { result in
-                switch result {
-                case .success(let zipcode):
-                    self.zipcode = zipcode
-                case .failure(let error):
-                    print(error)
-                    self.zipcode = ""
-                }
-            }
-            postAddress.fetchAddress(url: fetchAddress(), decodeType: AddressResponse.self) { result in
-                switch result {
-                case .success(let address):
-                    postAddress
-                }
-            }
-        },label: {
-            Text("検索")
-        }
-                                            ))
     }
     
     func fetchAddress() -> String {

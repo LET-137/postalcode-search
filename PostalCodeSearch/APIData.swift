@@ -20,23 +20,14 @@ class PostAddress: ObservableObject {
     
 //    郵便番号を取得
     func fetchZipcode <T: Decodable>(url: String, decodeType: T.Type, completion: @escaping (Result<String, Error>) -> Void) {
-//    func fetchZipcode(url: String) {
         fetchData(url: url, decodeType: decodeType) { result in
             switch result {
             case .success(let decodedResponse):
-//                DispatchQueue.main.async {
                 if let decodedIntData = decodedResponse as? Int {
                     let zipcode = self.formatZipcode(decodedIntData)
                     completion(.success(zipcode))
                 }
-                
-//                    self.zipAddress = self.formatZipcode(decodedResponse)
-//                }
             case .failure(let error):
-//                print(error.localizedDescription)
-//                DispatchQueue.main.async {
-//                    self.zipAddress = ""
-//                }
                 completion(.failure(error))
             }
         }
@@ -44,21 +35,13 @@ class PostAddress: ObservableObject {
     
 //    住所を検索
     func fetchAddress <T: Decodable>(url: String, decodeType: T.Type, completion: @escaping (Result<[Address], Error>) -> Void) {
-//    func fetchAddress(url: String) {
         fetchData(url: url, decodeType: AddressResponse.self) { result in
             switch result {
             case .success(let decodedResponse):
-//                DispatchQueue.main.async {
-//                    self.address = decodedResponse.results ?? []
-//                }
                 let address = decodedResponse.results ?? []
                 completion(.success(address))
             case .failure(let error):
                 completion(.failure(error))
-//                print(error.localizedDescription)
-//               DispatchQueue.main.async {
-//                   self.address = []
-//               }
             }
         }
     }
